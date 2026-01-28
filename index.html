@@ -1,55 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Birthday Countdown</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>30 Days 💕</title>
+
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #ffeef2;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        overflow: hidden;
-    }
-    .hint {
-        font-size: 22px;
-        color: #444;
-    }
-    .dog {
-        position: absolute;
-        bottom: -300px;
-        width: 220px;
-        transition: bottom 0.8s ease;
-    }
-    .show {
-        bottom: 50px;
-    }
-    .text {
-        margin-top: 20px;
-        font-size: 26px;
-        font-weight: bold;
-    }
+/* =====================
+   GLOBAL RESET
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Comic Sans MS', 'Trebuchet MS', cursive;
+}
+
+/* =====================
+   MAIN CONTAINER
+===================== */
+#app {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(180deg, #fdeff2, #fce7eb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  touch-action: manipulation;
+}
+
+/* =====================
+   TAP TEXT
+===================== */
+#tapText {
+  font-size: 1.8rem;
+  color: #ff7aa2;
+  text-align: center;
+  transition: opacity 0.8s ease;
+}
+
+/* =====================
+   DOG SCENE
+===================== */
+#scene {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+/* =====================
+   MESSAGE
+===================== */
+#message {
+  font-size: 1.6rem;
+  color: #ff6f91;
+  margin-bottom: 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 1s ease;
+}
+
+/* =====================
+   DOG
+===================== */
+#dog {
+  position: relative;
+  width: 140px;
+  height: 160px;
+}
+
+/* Body */
+.body {
+  width: 120px;
+  height: 90px;
+  background: #5a3a2e;
+  border-radius: 60px;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+}
+
+/* Head */
+.head {
+  width: 80px;
+  height: 80px;
+  background: #5a3a2e;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 30px;
+}
+
+/* Eyes */
+.eye {
+  width: 8px;
+  height: 8px;
+  background: #000;
+  border-radius: 50%;
+  position: absolute;
+  top: 30px;
+}
+
+.eye.left { left: 22px; }
+.eye.right { right: 22px; }
+
+/* Nose */
+.nose {
+  width: 10px;
+  height: 6px;
+  background: #000;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 18px;
+  left: 35px;
+}
+
+/* Ears */
+.ear {
+  width: 20px;
+  height: 40px;
+  background: #3e251c;
+  border-radius: 20px;
+  position: absolute;
+  top: -20px;
+  animation: earWiggle 2s infinite ease-in-out;
+}
+
+.ear.left { left: 0; }
+.ear.right { right: 0; animation-delay: 1s; }
+
+/* Tail */
+.tail {
+  width: 40px;
+  height: 10px;
+  background: #3e251c;
+  border-radius: 10px;
+  position: absolute;
+  right: -20px;
+  bottom: 30px;
+  transform-origin: left center;
+  animation: wag 0.6s infinite ease-in-out;
+}
+
+/* =====================
+   GRASS
+===================== */
+#grass {
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(#9be3a2, #7fd48b);
+  position: absolute;
+  bottom: 0;
+}
+
+/* =====================
+   ANIMATIONS
+===================== */
+@keyframes wag {
+  0% { transform: rotate(20deg); }
+  50% { transform: rotate(-20deg); }
+  100% { transform: rotate(20deg); }
+}
+
+@keyframes earWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+}
+
+/* =====================
+   HEARTS
+===================== */
+.heart {
+  position: absolute;
+  color: #ff7aa2;
+  font-size: 16px;
+  animation: floatUp 3s linear forwards;
+}
+
+@keyframes floatUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-120px);
+  }
+}
 </style>
 </head>
+
 <body>
+<div id="app">
+  <div id="tapText">Tap anywhere on the screen 💕</div>
 
-<div class="hint">Tap anywhere 👆</div>
+  <div id="scene">
+    <div id="message">30 Days to go Sweeshti &lt;3</div>
 
-<img src="https://i.imgur.com/7yUvePI.png" class="dog" id="dog">
-<div class="text" id="text"></div>
+    <div id="dog">
+      <div class="head">
+        <div class="ear left"></div>
+        <div class="ear right"></div>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="nose"></div>
+      </div>
+
+      <div class="body">
+        <div class="tail"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="grass"></div>
+</div>
 
 <script>
-document.body.addEventListener("click", () => {
-    document.getElementById("dog").classList.add("show");
-    document.getElementById("text").innerText =
-        "🐾 29 days to go Sweeshti 🐾";
-});
-</script>
+// =====================
+// TAP HANDLING
+// =====================
+let activated = false;
 
+document.getElementById('app').addEventListener('touchstart', startExperience, { once: true });
+document.getElementById('app').addEventListener('click', startExperience, { once: true });
+
+function startExperience() {
+  if (activated) return;
+  activated = true;
+
+  const tapText = document.getElementById('tapText');
+  const scene = document.getElementById('scene');
+  const message = document.getElementById('message');
+
+  tapText.style.opacity = '0';
+
+  setTimeout(() => {
+    scene.style.opacity = '1';
+  }, 600);
+
+  setTimeout(() => {
+    message.style.opacity = '1';
+    message.style.transform = 'translateY(0)';
+  }, 1200);
+
+  // Hearts
+  setInterval(createHeart, 400);
+}
+
+// =====================
+// HEART GENERATOR
+// =====================
+function createHeart() {
+  const heart = document.createElement('div');
+  heart.className = 'heart';
+  heart.textContent = '❤';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.bottom = '80px';
+  document.body.appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 3000);
+}
+</script>
 </body>
 </html>
