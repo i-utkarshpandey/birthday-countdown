@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Countdown</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ffeef2;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        overflow: hidden;
+    }
+    .hint {
+        font-size: 22px;
+        color: #444;
+    }
+    .dog {
+        position: absolute;
+        bottom: -300px;
+        width: 220px;
+        transition: bottom 0.8s ease;
+    }
+    .show {
+        bottom: 50px;
+    }
+    .text {
+        margin-top: 20px;
+        font-size: 26px;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="hint">Tap anywhere 👆</div>
+
+<img src="https://i.imgur.com/7yUvePI.png" class="dog" id="dog">
+<div class="text" id="text"></div>
+
+<script>
+document.body.addEventListener("click", () => {
+    document.getElementById("dog").classList.add("show");
+    document.getElementById("text").innerText =
+        "🐾 29 days to go Sweeshti 🐾";
+});
+</script>
+
+</body>
+</html>
